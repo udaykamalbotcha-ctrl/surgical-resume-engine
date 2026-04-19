@@ -93,14 +93,14 @@ export default function ResumeUpload({ onSuccess, onError }: ResumeUploadProps) 
           "relative cursor-pointer rounded-2xl border-2 border-dashed p-12 text-center transition-all duration-300",
           "bg-[rgba(255,255,255,0.02)] backdrop-blur-xl",
           isDragging
-            ? "border-purple-500 shadow-[0_0_30px_rgba(138,43,226,0.15)]"
-            : "border-white/10 hover:border-white/20 hover:shadow-[0_0_20px_rgba(138,43,226,0.08)]",
+            ? "border-custom-purple shadow-[0_0_30px_rgba(176,101,255,0.15)]"
+            : "border-white/10 hover:border-white/20 hover:shadow-[0_0_20px_rgba(176,101,255,0.08)]",
           isLoading && "pointer-events-none opacity-70"
         )}
       >
         {/* Subtle glow on drag */}
         {isDragging && (
-          <div className="absolute inset-0 rounded-2xl bg-purple-500/5 pointer-events-none" />
+          <div className="absolute inset-0 rounded-2xl bg-custom-purple/5 pointer-events-none" />
         )}
 
         <input
@@ -115,12 +115,12 @@ export default function ResumeUpload({ onSuccess, onError }: ResumeUploadProps) 
         <div className="flex flex-col items-center gap-4 relative z-10">
           {isLoading ? (
             <>
-              <Loader2 className="w-10 h-10 text-purple-400 animate-spin" />
+              <Loader2 className="w-10 h-10 text-custom-purple-light animate-spin" />
               <p className="text-zinc-400">Parsing your resume…</p>
             </>
           ) : fileName ? (
             <>
-              <FileText className="w-10 h-10 text-purple-400" />
+              <FileText className="w-10 h-10 text-custom-purple-light" />
               <div className="flex items-center gap-2">
                 <p className="text-zinc-300 font-medium">{fileName}</p>
                 <button
@@ -141,7 +141,7 @@ export default function ResumeUpload({ onSuccess, onError }: ResumeUploadProps) 
               <div>
                 <p className="text-zinc-300 font-medium">
                   Drop your resume here or{" "}
-                  <span className="text-purple-400 underline underline-offset-4">browse</span>
+                  <span className="text-custom-purple-light underline underline-offset-4">browse</span>
                 </p>
                 <p className="text-sm text-zinc-500 mt-1">PDF files only, up to 10MB</p>
               </div>

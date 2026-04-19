@@ -3,8 +3,9 @@
 import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Sparkles, Rocket, Shield, Cpu, ArrowRight,
+  Sparkles, ArrowRight,
   CheckCircle2, AlertCircle, Search, Loader2,
+  Mail
 } from "lucide-react";
 import ResumeUpload from "@/components/ResumeUpload";
 import JobResults from "@/components/JobResults";
@@ -158,14 +159,9 @@ export default function Home() {
     visible: { opacity: 1, y: 0 },
   };
 
-  const features = [
-    { icon: <Rocket className="w-6 h-6" />, title: "Rapid Automation", desc: "Scale your career with AI-driven workflows." },
-    { icon: <Shield className="w-6 h-6" />, title: "Secure Insights", desc: "Your data is protected by enterprise-grade security." },
-    { icon: <Cpu className="w-6 h-6" />, title: "Smart Matching", desc: "Advanced algorithms to find your perfect fit." },
-  ];
 
   return (
-    <div className="flex flex-col items-center justify-center py-20 px-6">
+    <div className="flex flex-col items-center justify-center pt-32 pb-20 px-6">
       {/* Toast */}
       <AnimatePresence>
         {toast && (
@@ -196,62 +192,140 @@ export default function Home() {
         variants={containerVariants}
         className="max-w-5xl w-full"
       >
-        {/* Hero Section */}
-        <div className="text-center mb-16">
+        {/* Hero Section — Dual-Column: Problem vs. Solution */}
+        <div className="text-center mb-0">
+          {/* Badge */}
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-custom-purple/10 border border-custom-purple/20 text-custom-purple-light text-sm mb-8"
           >
             <Sparkles className="w-4 h-4" />
-            <span>Welcome to the Future</span>
+            <span>AI-Powered Career Intelligence</span>
           </motion.div>
 
+          {/* Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50"
+            className="text-6xl md:text-8xl font-extrabold tracking-tighter mb-12 text-white leading-none"
           >
-            Automate Your <br />
-            <span className="text-purple-500">Career Growth</span>
+            Don&apos;t Just Apply.<br />
+            <span className="text-gradient">Be the Perfect Match.</span>
           </motion.h1>
 
-          <motion.p
+          {/* Dual-Column Cards */}
+          <motion.div
             variants={itemVariants}
-            className="text-lg text-zinc-400 max-w-2xl mx-auto mb-10"
+            className="grid md:grid-cols-2 gap-6 mb-12 text-left"
           >
-            Experience the next generation of career management. Our platform uses
-            advanced AI to streamline your professional journey, from skill mapping to
-            opportunity matching.
-          </motion.p>
+            {/* LEFT — The Problem (Failing Neon) */}
+            <motion.div
+              initial={{ opacity: 0, x: -24 }}
+              animate={{ opacity: 0.55, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+              className="relative overflow-hidden rounded-2xl p-8 backdrop-blur-md bg-black/30 border border-white/8 flex flex-col gap-5"
+            >
+              {/* Analog static noise overlay */}
+              <div className="noise-overlay" />
 
-          <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-4">
-            <button className="px-8 py-3 rounded-full bg-white text-black font-semibold hover:bg-zinc-200 transition-all flex items-center gap-2 group">
+              <div className="flex items-center gap-3 relative z-10">
+                <div className="w-8 h-8 rounded-lg bg-zinc-800 flex items-center justify-center shrink-0">
+                  <svg className="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h2 className="neon-flicker-text text-sm font-bold text-zinc-400 tracking-wide uppercase">The Manual Friction</h2>
+              </div>
+              <p
+                className="text-xl text-zinc-400 leading-relaxed relative z-10"
+                style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}
+              >
+                Manual tailoring is a soul-crushing career tax. You sacrifice your evenings to job
+                descriptions that might{" "}
+                <span className="text-zinc-300 font-medium">never see a human eye.</span>
+              </p>
+              <div className="mt-auto pt-4 border-t border-white/5 relative z-10">
+                <p className="text-xs text-zinc-600 font-mono">STATUS: BROKEN PROCESS</p>
+              </div>
+            </motion.div>
+
+            {/* RIGHT — The Solution */}
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 1.0, ease: "easeOut" }}
+              onMouseEnter={() => {
+                const cvs = document.querySelector("canvas");
+                if (cvs) cvs.style.setProperty("--particle-flare", "1");
+                document.querySelector("#solution-card")?.classList.add("flare-active");
+              }}
+              onMouseLeave={() => {
+                document.querySelector("#solution-card")?.classList.remove("flare-active");
+              }}
+              id="solution-card"
+              className="relative rounded-2xl p-8 backdrop-blur-md bg-custom-purple/5 border border-custom-purple/50 flex flex-col gap-5 aura-pulse transition-all duration-500 group"
+            >
+              {/* Neon glow ring on hover */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-custom-purple/10 via-transparent to-custom-purple/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+              <div className="flex items-center gap-3 relative z-10">
+                <div className="w-8 h-8 rounded-lg bg-custom-purple/20 border border-custom-purple/30 flex items-center justify-center shrink-0">
+                  <Sparkles className="w-4 h-4 text-custom-purple-light" />
+                </div>
+                <h2 className="text-lg font-bold text-custom-purple-light tracking-wide uppercase text-sm">The Surgical Edge</h2>
+              </div>
+              <p
+                className="text-xl text-zinc-200 leading-relaxed relative z-10"
+                style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}
+              >
+                This surgical AI engine fetches listings and executes{" "}
+                <span className="text-white font-semibold">factual, high-precision edits</span>{" "}
+                in seconds. Don&apos;t just land on the desk—
+                <span className="text-custom-purple-light font-semibold">lead the list.</span>
+              </p>
+
+              {/* Surgical Metrics Badges Footer */}
+              <div className="mt-auto pt-4 border-t border-custom-purple/20 relative z-10 flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-custom-purple/10 border border-custom-purple/25 text-custom-purple-light text-xs font-semibold">
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                  </svg>
+                  100% Factual Grounding
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-custom-purple/10 border border-custom-purple/25 text-custom-purple-light text-xs font-semibold">
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                  </svg>
+                  ≤10% Edit Constraint
+                </span>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.6 }}
+            className="flex flex-wrap justify-center gap-4"
+          >
+            <button
+              onClick={() => document.getElementById("resume-upload-section")?.scrollIntoView({ behavior: "smooth" })}
+              className="px-8 py-3.5 rounded-full bg-white text-black font-semibold hover:bg-custom-purple-light transition-all flex items-center gap-2 group shadow-lg shadow-custom-purple/20"
+            >
               Get Started
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="px-8 py-3 rounded-full bg-zinc-900 border border-zinc-800 text-white font-semibold hover:bg-zinc-800 transition-all">
-              Live Demo
-            </button>
+
           </motion.div>
         </div>
 
-        {/* Feature Grid */}
-        <motion.div
-          variants={itemVariants}
-          className="grid md:grid-cols-3 gap-6 mb-16"
-        >
-          {features.map((feature, idx) => (
-            <div key={idx} className="glass-card p-8 group">
-              <div className="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 mb-6 group-hover:scale-110 transition-transform">
-                {feature.icon}
-              </div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-zinc-500">{feature.desc}</p>
-            </div>
-          ))}
-        </motion.div>
 
         {/* Resume Upload Section */}
-        <motion.div variants={itemVariants} className="mb-16">
+        <motion.div
+          id="resume-upload-section"
+          variants={itemVariants}
+          className="mb-16 pt-[20vh]"
+        >
           <h2 className="text-2xl font-bold mb-2 text-center">Upload Your Resume</h2>
           <p className="text-zinc-500 text-center mb-8">
             Drop your PDF resume below to get started
@@ -395,7 +469,7 @@ export default function Home() {
             <button
               onClick={handleSearchJobs}
               disabled={isSearching}
-              className="px-8 py-3 rounded-xl bg-purple-600 text-white font-semibold hover:bg-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm"
+              className="px-8 py-3 rounded-xl bg-custom-purple text-white font-semibold hover:bg-custom-purple-light transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm shadow-lg shadow-custom-purple/20"
               id="search-jobs-btn"
             >
               {isSearching ? (
@@ -462,6 +536,54 @@ export default function Home() {
             <p className="text-zinc-400">No jobs found. Try different keywords or location.</p>
           </motion.div>
         )}
+      </motion.div>
+
+      {/* The Architect Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        onMouseEnter={() => {
+          const cvs = document.querySelector("canvas");
+          if (cvs) cvs.style.setProperty("--particle-flare", "1");
+          document.querySelector("#architect-card")?.classList.add("flare-active");
+        }}
+        onMouseLeave={() => {
+          document.querySelector("#architect-card")?.classList.remove("flare-active");
+        }}
+        id="architect-card"
+        className="relative max-w-4xl w-full mx-auto mt-12 mb-8 p-8 md:p-12 rounded-[2rem] backdrop-blur-md bg-white/5 border border-custom-purple/20 flex flex-col md:flex-row items-center gap-8 shadow-[0_0_40px_rgba(176,101,255,0.08)] hover:shadow-[0_0_60px_rgba(176,101,255,0.2)] transition-all duration-500 overflow-hidden group z-10"
+      >
+        {/* Subtle neon ring on hover */}
+        <div className="absolute inset-0 bg-gradient-to-br from-custom-purple/10 via-transparent to-custom-purple/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+        <div className="flex-1 text-center md:text-left relative z-10">
+          <p className="text-zinc-500 text-sm font-medium tracking-widest uppercase mb-3">Engineered by</p>
+          <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-5 leading-none font-sans">
+            Uday Kamal
+          </h2>
+          <p className="text-lg text-zinc-300 leading-relaxed mb-8 max-w-xl mx-auto md:mx-0">
+            Software Engineer specializing in Agent-first AI architectures and high-precision career automation.
+          </p>
+          <div className="inline-block bg-black/40 border border-white/10 px-4 py-2 rounded-lg shadow-inner">
+            <p className="text-[13px] font-mono text-custom-purple-light">
+              <span className="text-zinc-500">//</span> 100% Factual Integrity | 0% Hallucinations
+            </p>
+          </div>
+        </div>
+        
+        <div className="flex flex-row md:flex-col gap-4 relative z-10 shrink-0">
+          <a href="https://github.com/udaykamalbotcha-ctrl" target="_blank" rel="noopener noreferrer" className="p-4 rounded-2xl bg-white/5 border border-white/10 text-zinc-400 hover:text-custom-purple-light hover:border-custom-purple/40 hover:bg-custom-purple/10 transition-all group/btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 group-hover/btn:scale-110 transition-transform"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.6-.2-1.4-.7-2.6-1.6-3.6.2-.5.3-1.2 0-2.6 0 0-1-.3-3.3 1.2a11 11 0 0 0-6 0c-2.3-1.5-3.3-1.2-3.3-1.2-.3 1.4-.2 2.1 0 2.6-.9 1-1.4 2.2-1.6 3.6 0 3.6 3 5.6 6 5.6a4.8 4.8 0 0 0-1 3.2v4"></path><path d="M9 18c-4.51 1.2-5-2.5-7-3"></path></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/uday-kamal/" target="_blank" rel="noopener noreferrer" className="p-4 rounded-2xl bg-white/5 border border-white/10 text-zinc-400 hover:text-custom-purple-light hover:border-custom-purple/40 hover:bg-custom-purple/10 transition-all group/btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 group-hover/btn:scale-110 transition-transform"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+          <a href="mailto:uday.kamal.botcha@gmail.com" className="p-4 rounded-2xl bg-white/5 border border-white/10 text-zinc-400 hover:text-custom-purple-light hover:border-custom-purple/40 hover:bg-custom-purple/10 transition-all group/btn">
+            <Mail className="w-6 h-6 group-hover/btn:scale-110 transition-transform" />
+          </a>
+        </div>
       </motion.div>
 
       {/* Tailor Modal */}

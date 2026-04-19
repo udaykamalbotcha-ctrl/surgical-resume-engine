@@ -58,7 +58,7 @@ export default function JobResults({ jobs, onTailorResume, isTailoring, tailorin
             <div className="flex-1">
               {/* Site badge */}
               {job.site && (
-                <span className="inline-block text-[11px] font-medium px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 mb-3 uppercase tracking-wide">
+                <span className="inline-block text-[11px] font-medium px-2 py-0.5 rounded-full bg-custom-purple/10 text-custom-purple-light border border-custom-purple/20 mb-3 uppercase tracking-wide">
                   {job.site}
                 </span>
               )}
@@ -88,7 +88,7 @@ export default function JobResults({ jobs, onTailorResume, isTailoring, tailorin
               <button
                 onClick={() => onTailorResume({ ...job, id: job.id || String(idx) })}
                 disabled={isTailoring}
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium hover:bg-purple-500/20 hover:border-purple-500/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-custom-purple/10 border border-custom-purple/20 text-custom-purple-light text-sm font-medium hover:bg-custom-purple/20 hover:border-custom-purple/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isCurrentTailoring ? (
                   <>

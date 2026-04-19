@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import CanvasParticles from "@/components/CanvasParticles";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,9 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="bg-background text-foreground antialiased selection:bg-purple-500/30">
-        {/* Background Glow */}
-        <div className="cosmic-glow" aria-hidden="true" />
+      <body className="bg-background text-foreground antialiased selection:bg-custom-purple/30 font-[Inter,sans-serif]">
+        {/* Background Animation */}
+        <CanvasParticles />
         
         {/* Main Content */}
         <main className="relative z-10 min-h-screen">

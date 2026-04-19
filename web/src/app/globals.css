@@ -1,11 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
+
+
 :root {
-  --background: #050505;
-  --foreground: #ffffff;
+  --background: #0f0f11;
+  --foreground: #e5e7eb;
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --accent-glow: rgba(138, 43, 226, 0.15);
+  --custom-purple: #b065ff;
+  --custom-purple-light: #d9a8ff;
 }
 
 @theme inline {
@@ -13,6 +17,8 @@
   --color-foreground: var(--foreground);
   --color-glass: var(--glass-bg);
   --color-glass-border: var(--glass-border);
+  --color-custom-purple: var(--custom-purple);
+  --color-custom-purple-light: var(--custom-purple-light);
 }
 
 body {
@@ -23,30 +29,92 @@ body {
   min-height: 100vh;
 }
 
-/* Cosmic Glow */
-.cosmic-glow {
-  position: fixed;
-  top: -10%;
-  right: -10%;
-  width: 60%;
-  height: 60%;
-  background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 70%);
-  filter: blur(80px);
-  pointer-events: none;
-  z-index: 0;
-}
 
 /* Glassmorphism */
+
 .glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 1rem;
   transition: all 0.3s ease;
 }
 
 .glass-card:hover {
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border-color: rgba(176, 101, 255, 0.3);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 }
+
+/* Text Gradient */
+.text-gradient {
+  background: linear-gradient(to right, #b065ff, #d9a8ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Failing Neon Flicker ─── */
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; filter: saturate(1); }
+  4%        { opacity: 0.6; filter: saturate(0.3); }
+  6%        { opacity: 1; filter: saturate(1); }
+  12%       { opacity: 0.65; filter: saturate(0.35); }
+  13%       { opacity: 1; filter: saturate(1); }
+  41%       { opacity: 1; filter: saturate(1); }
+  43%       { opacity: 0.55; filter: saturate(0.25); }
+  44%       { opacity: 0.8; filter: saturate(0.6); }
+  46%       { opacity: 1; filter: saturate(1); }
+  73%       { opacity: 1; filter: saturate(1); }
+  74%       { opacity: 0.6; filter: saturate(0.3); }
+  75%       { opacity: 0.9; filter: saturate(0.7); }
+  76%       { opacity: 0.55; filter: saturate(0.25); }
+  78%       { opacity: 1; filter: saturate(1); }
+}
+
+.neon-flicker-text {
+  animation: neon-flicker 4s ease-in-out infinite;
+}
+
+/* ─── Analog Static Noise Overlay ─── */
+@keyframes noise-drift {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-2%, 2%); }
+  50%  { transform: translate(1%, -1%); }
+  75%  { transform: translate(-1%, -2%); }
+  100% { transform: translate(0, 0); }
+}
+
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  animation: noise-drift 0.8s steps(3) infinite;
+  mix-blend-mode: overlay;
+}
+
+/* ─── Pulsating Aura (Solution Card) ─── */
+@keyframes aura-breathe {
+  0%, 100% { box-shadow: 0 0 30px rgba(176, 101, 255, 0.12), 0 0 60px rgba(176, 101, 255, 0.06); }
+  50%      { box-shadow: 0 0 45px rgba(176, 101, 255, 0.25), 0 0 80px rgba(176, 101, 255, 0.12); }
+}
+
+@keyframes aura-breathe-hover {
+  0%, 100% { box-shadow: 0 0 50px rgba(176, 101, 255, 0.3), 0 0 100px rgba(176, 101, 255, 0.15); }
+  50%      { box-shadow: 0 0 70px rgba(176, 101, 255, 0.5), 0 0 120px rgba(176, 101, 255, 0.25); }
+}
+
+.aura-pulse {
+  animation: aura-breathe 3s ease-in-out infinite;
+}
+
+.aura-pulse:hover {
+  animation: aura-breathe-hover 2s ease-in-out infinite;
+}
+

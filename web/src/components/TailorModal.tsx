@@ -50,7 +50,7 @@ export default function TailorModal({ isOpen, onClose, report, jobTitle, company
         <div className="p-6 overflow-y-auto custom-scrollbar">
           <p className="text-sm text-zinc-400 mb-6">
             We tailored your resume for <strong className="text-white">{jobTitle}</strong> at <strong className="text-white">{company}</strong>. 
-            The ATS-optimized <strong className="text-purple-400">.pdf</strong> file has automatically downloaded.
+            The ATS-optimized <strong className="text-custom-purple-light">.pdf</strong> file has automatically downloaded.
           </p>
 
           {/* Score Box */}
@@ -77,7 +77,7 @@ export default function TailorModal({ isOpen, onClose, report, jobTitle, company
             {report.keywordsAdded.length > 0 ? (
               <div className="flex flex-wrap gap-2">
                 {report.keywordsAdded.map((kw, i) => (
-                  <span key={i} className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs">
+                  <span key={i} className="px-3 py-1 rounded-full bg-custom-purple/10 border border-custom-purple/20 text-custom-purple-light text-xs">
                     {kw}
                   </span>
                 ))}
