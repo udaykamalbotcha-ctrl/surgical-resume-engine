@@ -2,6 +2,12 @@
   "name": "career-automation-app",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
     "@google/genai": "^1.48.0",
     "@modelcontextprotocol/sdk": "^1.28.0",
@@ -9,6 +15,9 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.1",
     "express": "^5.2.1",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
     "winston": "^3.19.0",
     "zod": "^4.3.6"
   }
