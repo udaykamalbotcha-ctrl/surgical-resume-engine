@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@google/genai": "^1.48.0",
+    "@iflow-mcp/borgius-jobspy-mcp-server": "^0.5.6",
     "@modelcontextprotocol/sdk": "^1.28.0",
     "change-case-object": "^2.0.0",
     "cors": "^2.8.6",
