@@ -1,10 +1,5 @@
 #!/usr/bin/env node
-// Silence stdout to prevent dotenv/dotenvx from printing "injected env" diamonds
-const originalWrite = process.stdout.write;
-process.stdout.write = () => {};
-import dotenv from 'dotenv';
-dotenv.config({ path: '.env.local' });
-process.stdout.write = originalWrite;
+
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import express from 'express';
